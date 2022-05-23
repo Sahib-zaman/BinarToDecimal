@@ -1,0 +1,75 @@
+package decimal_to_binary;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class calculator extends JFrame {
+    JButton button = new JButton();
+    JComboBox box = new JComboBox();
+    Font font =new Font("serif",Font.BOLD,20);
+    JLabel label = new JLabel();
+    JLabel result = new JLabel();
+    JTextField text = new JTextField();
+    Container c = this.getContentPane();
+    public void display(){
+        this.setSize(400,400);
+        this.setLocationRelativeTo(null);
+        this.setLayout(null);
+        this.setTitle("Binary to Decimal Conversion");
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        label.setText("Conversion");
+        label.setBounds(50,10,300,50);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setFont(font);
+        String set[]=new String[3];
+        set[0]="Select";
+        set[1]="Decimal to Binary";
+        set[2]="Binary to Decimal";
+        for (int i = 0; i < set.length; i++) {
+            box.addItem(set[i]);
+        }
+        box.setFont(font);
+        box.setBounds(50,70,300,50);
+        text.setFont(font);
+        text.setBounds(50,130,300,50);
+        button.setText("Convert");
+        button.setFont(font);
+        button.setBounds(50,190,300,50);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource()==button){
+                    if (box.getSelectedIndex()==0){
+                        result.setText("Select Conversion value");
+                    }
+                    else
+                    if (box.getSelectedIndex()==1){
+                        String s=text.getText();
+                        String a =Integer.toBinaryString(Integer.parseInt(s));
+                        result.setText(s+" to "+a);
+                    }
+
+                }
+                if (e.getSource()==button && box.getSelectedItem()=="Binary to Decimal"){
+                    String number=text.getText();
+                    int a =Integer.parseInt(number,2);
+                    result.setText(number+" to "+String.valueOf(a));
+                }
+            }});
+        result.setBounds(50,250,300,50);
+        result.setHorizontalAlignment(JLabel.CENTER);
+        result.setFont(font);
+        this.add(text);
+        this.add(box);
+        this.add(button);
+        this.add(label);
+        this.add(result);
+        this.setVisible(true);
+    }
+    calculator(){
+        display();
+    }
+    public static void main(String args []){
+        calculator c = new calculator();
+    }
+}
